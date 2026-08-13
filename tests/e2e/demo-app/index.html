@@ -1,0 +1,155 @@
+<!doctype html>
+<!--
+  Demo Dashboard - a self-contained stand-in for the real platform UI.
+
+  PROVENANCE: this is a simplified, offline copy of the look and behaviour of
+  the real frontend's Server List page + Create Server modal + Server Card
+  (frontend/src/pages/dashboard/ServerListPage.tsx, components/dashboard/
+  CreateServerModal.tsx and ServerCard.tsx).
+
+  Why a demo instead of the real app? So you can learn browser testing with
+  ZERO setup - no login, no backend, no database. Once you are comfortable, the
+  E2E guide shows how to point these exact same tests at the real running app.
+
+  It is deliberately plain HTML/CSS/JS (no build step) and fully deterministic
+  (no random values, no clocks) so your screenshots are stable.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Minecraft Servers - Demo Dashboard</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 32px;
+      }
+      h1 { font-size: 24px; margin-bottom: 4px; }
+      .subtitle { color: #94a3b8; margin-bottom: 24px; }
+      .create-btn {
+        background: #22c55e; color: #052e16; border: none; 
+        padding: 10px 18px; border-radius: 8px; font-weight: 600;
+        cursor: pointer; font-size: 14px;
+      }
+      .create-btn:hover { background: #16a34a; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; }
+      .card {
+        background: rgba(30,41,59,.5); border: 1px solid #334155;
+        border-radius: 12px; padding: 20px;
+      }
+      .card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+      .card h3 { font-size: 18px; color: #fff; }
+      .card .version { font-size: 13px; color: #94a3b8; }
+      .badge { font-size: 12px; padding: 3px 10px; border-radius: 999px; font-weight: 600; }
+      .badge.running { background: rgba(34,197,94,.2); color: #4ade80; }
+      .badge.stopped { background: rgba(148,163,184,.2); color: #cbd5e1; }
+      .row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
+      .row .label { color: #94a3b8; }
+      /* Modal */
+      .overlay {
+        position: fixed; inset: 0; background: rgba(0,0,0,.6);
+        display: none; align-items: center; justify-content: center;
+      }
+      .overlay.open { display: flex; }
+      .modal { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; width: 380px; }
+      .modal h2 { font-size: 18px; margin-bottom: 16px; }
+      .field { margin-bottom: 14px; }
+      .field label { display: block; font-size: 13px; color: #94a3b8; margin-bottom: 6px; }
+      .field input, .field select {
+        width: 100%; padding: 8px 10px; border-radius: 8px;
+        background: #0f172a; border: 1px solid #334155; color: #e2e8f0; font-size: 14px;
+      }
+      .error { color: #f87171; font-size: 13px; margin-bottom: 12px; min-height: 18px; }
+      .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+      .btn-secondary { background: #334155; color: #e2e8f0; border: none; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <header style="display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <h1>Your Servers</h1>
+        <p class="subtitle">Deploy and manage Minecraft servers on Kubernetes</p>
+      </div>
+      <button class="create-btn" id="open-create">+ Create Server</button>
+    </header>
+
+    <main class="grid" id="server-grid">
+      <div class="card" data-server="Survival World">
+        <div class="card-head">
+          <div>
+            <h3>Survival World</h3>
+            <p class="version">1.20.1</p>
+          </div>
+          <span class="badge running">Running</span>
+        </div>
+        <div class="row"><span class="label">Players</span><span>3 / 20</span></div>
+        <div class="row"><span class="label">Address</span><span>play.demo.mc:25565</span></div>
+      </div>
+    </main>
+
+    <!-- Create Server modal -->
+    <div class="overlay" id="create-overlay">
+      <div class="modal" role="dialog" aria-label="Create Server">
+        <h2>Create a new server</h2>
+        <div class="error" id="form-error" aria-live="polite"></div>
+        <div class="field">
+          <label for="name">Server name</label>
+          <input id="name" name="name" placeholder="My Server" />
+        </div>
+        <div class="field">
+          <label for="type">Server type</label>
+          <select id="type" name="type">
+            <option>VANILLA</option>
+            <option>PAPER</option>
+            <option>FABRIC</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancel-create">Cancel</button>
+          <button class="create-btn" id="submit-create">Create</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Minimal behaviour, mirroring the real modal's happy path + one validation rule.
+      const overlay = document.getElementById('create-overlay');
+      const errorBox = document.getElementById('form-error');
+      const nameInput = document.getElementById('name');
+
+      document.getElementById('open-create').addEventListener('click', () => {
+        errorBox.textContent = '';
+        nameInput.value = '';
+        overlay.classList.add('open');
+      });
+      document.getElementById('cancel-create').addEventListener('click', () => {
+        overlay.classList.remove('open');
+      });
+
+      document.getElementById('submit-create').addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        // Validation rule (same idea as the real form): a name is required.
+        if (name === '') {
+          errorBox.textContent = 'Server name is required';
+          return;
+        }
+        // Happy path: add a new card and close the modal.
+        const grid = document.getElementById('server-grid');
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.setAttribute('data-server', name);
+        card.innerHTML =
+          '<div class="card-head"><div><h3></h3><p class="version">1.20.1</p></div>' +
+          '<span class="badge stopped">Stopped</span></div>' +
+          '<div class="row"><span class="label">Players</span><span>0 / 20</span></div>';
+        // Set the name via textContent to avoid any HTML-injection surprises.
+        card.querySelector('h3').textContent = name;
+        grid.appendChild(card);
+        overlay.classList.remove('open');
+      });
+    </script>
+  </body>
+</html>

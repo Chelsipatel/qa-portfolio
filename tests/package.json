@@ -1,0 +1,28 @@
+{
+  "name": "qa-learning",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A safe practice sandbox for learning software testing against the Minecraft Hosting Platform. Standalone - NOT part of the main project's workspaces or CI.",
+  "type": "module",
+  "scripts": {
+    "test:unit": "vitest run unit",
+    "test:unit:watch": "vitest unit",
+    "test:integration": "vitest run integration",
+    "test:traps": "vitest run --config vitest.traps.config.ts",
+    "coverage": "vitest run --coverage",
+    "test:visual": "playwright test visual",
+    "test:e2e": "playwright test e2e",
+    "test:e2e:record": "playwright codegen"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.5",
+    "@types/supertest": "^6.0.2",
+    "@vitest/coverage-v8": "^2.1.8",
+    "express": "^4.21.2",
+    "supertest": "^7.0.0",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
