@@ -44,7 +44,7 @@ square brackets goes the **alt text** (what the picture shows, for anyone who
 can't see it — that's an accessibility habit worth having as a tester):
 
 ```markdown
-![The unit suite passing: 71 tests, 0 failures](./evidence/2026-07-21_Unit_Validators_71-Passed.png)
+![The unit suite passing: 71 tests, 0 failures](./evidence/2026-07-21_Unit_fullSuite_71-Passed.png)
 ```
 
 Because the case studies live in `portfolio/` and the images live in
