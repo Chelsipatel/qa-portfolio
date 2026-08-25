@@ -37,14 +37,14 @@ case study below tells the story: my thinking, the tests, the evidence, and what
 I'm a **Computer Science graduate** (BSc Hons, 2:1, University of Bedfordshire, 2024) moving
 into QA.
 
-In my final year I was **Scrum Master and co-developer on INTERN** — a two-sided mobile
-internship marketplace built in React Native by a team of five. I ran the Agile ceremonies,
+In my final year I was Project Manager on INTERN — a two-sided internship marketplace prototyped in Oracle APEX by a team of five.
+I ran the Agile ceremonies and owned the Gantt schedule, work packages, and the risk and quality plans.I ran the Agile ceremonies,
 defined the team roles (including our **QA Lead**), and delivered a live product demo to a
 panel from **Fiserv**, who said they would invest in it. Running those sprints taught me how
 software actually gets built and shipped — and how much easier something is to test when you
 genuinely understand *why* it exists and who it's for.
 
-Alongside all four years of study I worked as a **Store Support Manager/Specialist** for
+Alongside my studies I spent two and a half years as a Store Support Specialist for
 Allenday, across M&S, Tesco, Sainsbury's, Waitrose, Asda and The Range. I trained and
 supervised store teams, ran seasonal visual merchandising campaigns across multiple sites,
 and was consistently requested back by name by client stores.
