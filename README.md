@@ -17,11 +17,11 @@
   installed on a clean machine, then unit and integration 
   tests.
 
-  **80 of the 91 tests run in CI** (60 unit, 20
-  integration). Two unit suites
-  (`parsePlayerList`, `playerList`) depend on application source belonging to the platform owner, which I don't have permission to publish, 
-  so they run locally only, so they run locally only —
-  a gap that only became visible when the pipeline ran on a machine that wasn't mine.
+  **79 of the 90 tests run in CI (59 unit, 20 integration). Two unit suites
+(parsePlayerList, playerList) test application    
+ source belonging to the platform owner, which I don't have    
+ permission to publish, so they run locally only. This only 
+ became visible when the pipeline first ran on a machine that wasn't mine.
 
 ## At a glance
 
