@@ -1,4 +1,7 @@
-# 🏆 Chelsi Patel — QA Portfolio
+![Tests](https://github.com/Chelsipatel/qa-portfolio/act
+  ions/workflows/tests.yml/badge.svg)
+  
+  # 🏆 Chelsi Patel — QA Portfolio
 
 > **Automated tests written against a real cloud-native Kubernetes platform.**
 
@@ -7,6 +10,21 @@
 💻 [GitHub](https://github.com/Chelsipatel)
 
 ---
+## Continuous integration
+
+  Every push runs the suite automatically via GitHub      
+  Actions — dependencies
+  installed on a clean machine, then unit and integration 
+  tests.
+
+  **80 of the 91 tests run in CI** (60 unit, 20
+  integration). Two unit suites
+  (`parsePlayerList`, `playerList`) depend on application 
+  source that isn't
+  published in this repository, so they run locally only —
+  a gap that only
+  became visible when the pipeline ran on a machine that  
+  wasn't mine.
 
 ## At a glance
 
