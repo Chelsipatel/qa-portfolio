@@ -19,12 +19,9 @@
 
   **80 of the 91 tests run in CI** (60 unit, 20
   integration). Two unit suites
-  (`parsePlayerList`, `playerList`) depend on application 
-  source that isn't
-  published in this repository, so they run locally only —
-  a gap that only
-  became visible when the pipeline ran on a machine that  
-  wasn't mine.
+  (`parsePlayerList`, `playerList`) depend on application source belonging to the platform owner, which I don't have permission to publish, 
+  so they run locally only, so they run locally only —
+  a gap that only became visible when the pipeline ran on a machine that wasn't mine.
 
 ## At a glance
 
